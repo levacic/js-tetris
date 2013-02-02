@@ -1,0 +1,18 @@
+{
+	"folders":
+	[
+		{
+			"path": "assets/css",
+			"name": "css"
+		},
+		{
+			"path": "assets/js/front",
+			"name": "js/front"
+		},
+		{
+			"path": "/",
+			"folder_exclude_patterns": [ "assets/css", "assets/js/front" ],
+			"name": "/"
+		}
+	]
+}

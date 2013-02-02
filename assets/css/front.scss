@@ -1,0 +1,122 @@
+@charset "utf-8";
+
+/* Reset and mixins */
+@import "util/reset";
+@import "util/mixin";
+
+/* Variables */
+$GAME_ROWS: 20;
+$GAME_COLS: 10;
+
+$CELL_HEIGHT: 20px;
+$CELL_WIDTH: 20px;
+
+$BORDER_COLOR: #fff;
+$BORDER_WIDTH: 2px;
+
+$COLOR_BLOCKED: #f00;
+
+$COLOR_BLOCK_I: #0ff;
+$COLOR_BLOCK_J: #00f;
+$COLOR_BLOCK_L: #f60;
+$COLOR_BLOCK_T: #a0f;
+$COLOR_BLOCK_S: #0f0;
+$COLOR_BLOCK_Z: #f00;
+$COLOR_BLOCK_O: #ff0;
+
+body {
+	margin:					0;
+
+	background:				#303030;
+
+	color:					#cbb;
+}
+
+div#main-container {
+	margin:					0 auto;
+	padding:				20px 50px 20px;
+
+	width:					900px;
+
+	background:				#383838;
+
+	hgroup {
+		h1, h2 {
+			margin:				0;
+		}
+	}
+}
+
+div#tetris-container {
+	position:				relative;
+
+	margin:					20px auto;
+
+	width:					$GAME_COLS * $CELL_WIDTH;
+	height:					$GAME_ROWS * $CELL_HEIGHT;
+
+	background:				#282828;
+}
+
+div.tetris-row {
+	position:				absolute;
+
+	width:					$GAME_COLS * $CELL_WIDTH;
+	height:					$CELL_HEIGHT;
+
+	@for $i from 0 through ($GAME_ROWS - 1) {
+		&[data-row="#{$i}"] {
+			top:					$i * $CELL_HEIGHT;
+		}
+	}
+}
+
+div.tetris-cell {
+	position:				absolute;
+
+	width:					$CELL_WIDTH;
+	height:					$CELL_HEIGHT;
+
+	@for $i from 0 through ($GAME_ROWS - 1) {
+		&[data-column="#{$i}"] {
+			left:					$i * $CELL_WIDTH;
+		}
+	}
+
+	&[data-blocked] {
+		border:					$BORDER_WIDTH solid $BORDER_COLOR;
+
+		$double_width: $BORDER_WIDTH * 2;
+
+		width:					$CELL_WIDTH - $double_width;
+		height:					$CELL_HEIGHT - $double_width;
+	}
+
+	&[data-block-type="i"] {
+		background:				$COLOR_BLOCK_I;
+	}
+
+	&[data-block-type="j"] {
+		background:				$COLOR_BLOCK_J;
+	}
+
+	&[data-block-type="l"] {
+		background:				$COLOR_BLOCK_L;
+	}
+
+	&[data-block-type="t"] {
+		background:				$COLOR_BLOCK_T;
+	}
+
+	&[data-block-type="s"] {
+		background:				$COLOR_BLOCK_S;
+	}
+
+	&[data-block-type="z"] {
+		background:				$COLOR_BLOCK_Z;
+	}
+
+	&[data-block-type="o"] {
+		background:				$COLOR_BLOCK_O;
+	}
+}

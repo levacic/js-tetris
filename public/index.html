@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="description" content="A JavaScript tetris experiment" />
+
+	<title>a JavaScript Tetris experiment</title>
+
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/ui-darkness/jquery-ui.css" />
+	<link rel="stylesheet" href="css/front.css" />
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
+	<script src="js/front/compiled.js"></script>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div id="main-container">
+		<hgroup>
+			<h1>a JavaScript tetris experiment</h1>
+			<h2>©2013 Miloš Levačić</h2>
+		</hgroup>
+
+		<button id="tetris-pause">Pause</button>
+		<button id="tetris-continue">Continue</button>
+
+		<div id="tetris-container">
+							<div class="tetris-row" data-row="0">
+											<div class="tetris-cell" data-row="0" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="0" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="0" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="0" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="0" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="0" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="0" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="0" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="0" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="0" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="1">
+											<div class="tetris-cell" data-row="1" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="1" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="1" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="1" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="1" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="1" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="1" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="1" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="1" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="1" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="2">
+											<div class="tetris-cell" data-row="2" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="2" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="2" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="2" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="2" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="2" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="2" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="2" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="2" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="2" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="3">
+											<div class="tetris-cell" data-row="3" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="3" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="3" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="3" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="3" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="3" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="3" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="3" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="3" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="3" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="4">
+											<div class="tetris-cell" data-row="4" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="4" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="4" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="4" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="4" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="4" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="4" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="4" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="4" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="4" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="5">
+											<div class="tetris-cell" data-row="5" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="5" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="5" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="5" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="5" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="5" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="5" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="5" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="5" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="5" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="6">
+											<div class="tetris-cell" data-row="6" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="6" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="6" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="6" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="6" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="6" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="6" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="6" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="6" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="6" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="7">
+											<div class="tetris-cell" data-row="7" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="7" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="7" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="7" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="7" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="7" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="7" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="7" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="7" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="7" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="8">
+											<div class="tetris-cell" data-row="8" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="8" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="8" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="8" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="8" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="8" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="8" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="8" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="8" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="8" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="9">
+											<div class="tetris-cell" data-row="9" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="9" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="9" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="9" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="9" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="9" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="9" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="9" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="9" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="9" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="10">
+											<div class="tetris-cell" data-row="10" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="10" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="10" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="10" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="10" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="10" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="10" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="10" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="10" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="10" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="11">
+											<div class="tetris-cell" data-row="11" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="11" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="11" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="11" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="11" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="11" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="11" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="11" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="11" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="11" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="12">
+											<div class="tetris-cell" data-row="12" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="12" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="12" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="12" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="12" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="12" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="12" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="12" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="12" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="12" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="13">
+											<div class="tetris-cell" data-row="13" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="13" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="13" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="13" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="13" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="13" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="13" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="13" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="13" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="13" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="14">
+											<div class="tetris-cell" data-row="14" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="14" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="14" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="14" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="14" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="14" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="14" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="14" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="14" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="14" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="15">
+											<div class="tetris-cell" data-row="15" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="15" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="15" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="15" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="15" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="15" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="15" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="15" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="15" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="15" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="16">
+											<div class="tetris-cell" data-row="16" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="16" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="16" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="16" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="16" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="16" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="16" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="16" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="16" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="16" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="17">
+											<div class="tetris-cell" data-row="17" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="17" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="17" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="17" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="17" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="17" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="17" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="17" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="17" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="17" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="18">
+											<div class="tetris-cell" data-row="18" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="18" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="18" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="18" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="18" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="18" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="18" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="18" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="18" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="18" data-column="9">
+						</div>
+									</div>
+							<div class="tetris-row" data-row="19">
+											<div class="tetris-cell" data-row="19" data-column="0">
+						</div>
+											<div class="tetris-cell" data-row="19" data-column="1">
+						</div>
+											<div class="tetris-cell" data-row="19" data-column="2">
+						</div>
+											<div class="tetris-cell" data-row="19" data-column="3">
+						</div>
+											<div class="tetris-cell" data-row="19" data-column="4">
+						</div>
+											<div class="tetris-cell" data-row="19" data-column="5">
+						</div>
+											<div class="tetris-cell" data-row="19" data-column="6">
+						</div>
+											<div class="tetris-cell" data-row="19" data-column="7">
+						</div>
+											<div class="tetris-cell" data-row="19" data-column="8">
+						</div>
+											<div class="tetris-cell" data-row="19" data-column="9">
+						</div>
+									</div>
+					</div>
+	</div>
+</body>
+</html>

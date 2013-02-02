@@ -1,0 +1,90 @@
+// Mixins
+
+@mixin links( $normal: #f00, $hover: #f90 ) {
+	a {
+		color:					$normal;
+		text-decoration:		none;
+		outline:				none;
+
+		&:hover,
+		&:active
+		{
+			color:					$hover;
+			text-decoration:		none;
+			outline:				none;
+		}
+	}
+}
+
+@mixin clearfix {
+	&:after {
+		content: "\0020";
+		display: block;
+		height: 0;
+		clear: both;
+		overflow: hidden;
+		visibility: hidden;
+	}
+}
+
+@mixin vendorize( $property, $data ) {
+	-webkit-#{$property}: $data;
+	   -moz-#{$property}: $data;
+	    -ms-#{$property}: $data;
+	     -o-#{$property}: $data;
+	        #{$property}: $data;
+}
+
+@mixin transition( $data ) {
+	@include vendorize( "transition", $data );
+}
+
+@mixin transform( $data ) {
+	@include vendorize( "transform", $data );
+}
+
+@mixin box-shadow( $shadow: 0 1px 3px rgba(0,0,0,.25) ) {
+	@include vendorize( "box-shadow", $shadow );
+}
+
+@mixin border-radius( $radius: 3px ) {
+	@include vendorize( "border-radius", $radius );
+}
+
+@mixin text-shadow( $color: #fff, $position: 0 1px 0 ) {
+	@include vendorize( "text-shadow", ( $position $color ) );
+}
+
+@mixin text-shadow-manual( $text-shadow: 0px 1px 0px #000 ) {
+	@include vendorize( "text-shadow", $text-shadow );
+}
+
+@mixin box-sizing( $data ) {
+	@include vendorize( "box-sizing", $data );
+}
+
+@mixin monospaced {
+	font-family: "Lucida Console", "Courier New", "Courier", monospace;
+}
+
+@mixin selection( $color ) {
+	::-moz-selection {
+		background:				$color;
+		color:					#fff;
+		text-shadow:			none;
+	}
+
+	::selection {
+		background:				$color;
+		color:					#fff;
+		text-shadow:			none;
+	}
+}
+
+@mixin linear-gradient($point, $color1, $color2){
+		background-image: 	-ms-linear-gradient($point, $color1, $color2);
+		background-image: 	-webkit-linear-gradient($point, $color1, $color2);
+		background-image: 	-o-linear-gradient($point, $color1, $color2);
+		background-image: 	-moz-linear-gradient($point, $color1, $color2);
+		background-image: 	linear-gradient($point, $color1, $color2);
+}
