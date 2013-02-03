@@ -866,6 +866,15 @@
 							restartTickTimer();
 						}
 						break;
+
+					case KEYS.arrow.down:
+						while ( blockCanMove( DIRECTION.down, currentBlock, gameMatrix ) ) {
+							currentBlock.move( DIRECTION.down );
+						}
+
+						renderCurrentState();
+						restartTickTimer();
+						break;
 				}
 			},
 
