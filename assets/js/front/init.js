@@ -39,15 +39,6 @@
 			SCORE_LENGTH = 10,
 
 			/**
-			 * Some predefined types for type comparison. Useful if a JS
-			 * implementation uses, e.g. "Number" instead of "number", and
-			 * easier and more readable than manipulating case in comparisons.
-			 */
-
-			TYPE_NUMBER = typeof( 42 ),
-			TYPE_STRING = typeof( "string" ),
-
-			/**
 			 * Some constants for handling the direction of movement.
 			 *
 			 * @type {Object}
@@ -561,7 +552,7 @@
 			 * @param {Number} speed
 			 */
 			setSpeed = function( speed ) {
-				if ( typeof( speed ) !== TYPE_NUMBER ) {
+				if ( typeof speed !== "number" ) {
 					throw new TypeError( "setSpeed expects a Number argument!" );
 				}
 
