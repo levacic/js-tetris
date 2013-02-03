@@ -55,6 +55,14 @@
 						<?php endfor; ?>
 					</div>
 				</section>
+				<section id="tetris-sidebar-lines">
+					<h1>COMPLETED LINES</h1>
+					<p id="tetris-current-lines">0</p>
+				</section>
+				<section id="tetris-sidebar-level">
+					<h1>LEVEL</h1>
+					<p id="tetris-current-level">1</p>
+				</section>
 				<section id="tetris-sidebar-score">
 					<h1>SCORE</h1>
 					<p id="tetris-current-score">0000000000</p>

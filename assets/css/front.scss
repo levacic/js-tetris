@@ -185,7 +185,10 @@ aside#tetris-sidebar {
 	font-family:			Consolas, Courier New, monospace;
 }
 
-section#tetris-sidebar-score {
+section#tetris-sidebar-score,
+section#tetris-sidebar-lines,
+section#tetris-sidebar-level
+{
 	h1, p {
 		margin:					0;
 		padding:				0;
