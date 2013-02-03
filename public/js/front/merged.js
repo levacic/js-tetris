@@ -303,7 +303,7 @@
 				block.type = randomBlock;
 
 				block.position = {};
-				block.position.x = 0;
+				block.position.x = 3;
 				block.position.y = 0;
 
 				block.rotation = 0;
