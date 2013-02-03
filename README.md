@@ -31,7 +31,7 @@ To-Do
 -----
 
 * Cache all the HTML elements in use, since they are currently a bottleneck in
-  some browsers - each time anything is updated, it does a *huge* number of DOM
-  lookups is performed.
+  some browsers - each time anything is updated, a *huge* number of DOM lookups
+  is performed
 * Standardize the block starting positions
 * Do some sane refactoring
