@@ -593,6 +593,20 @@
 			renderCurrentBlock = function() {
 				var i, j, currentX, currentY, currentHtmlCell;
 
+				/**
+				 * If there is no current block, we'll just return. This is
+				 * useful in the case of game over, since `currentBlock` will be
+				 * set to `null` so we wouldn't render the failing block over
+				 * blocks that are already rendered.
+				 *
+				 * We should later rewrite the code so new blocks start from
+				 * above the game matrix, instead of at the top of it, enabling
+				 * us to handle game over situations more gracefully.
+				 */
+				if ( currentBlock === null ) {
+					return;
+				}
+
 				currentHtmlCell = getHtmlCell( currentBlock.position.y, currentBlock.position.x );
 
 				for ( i = 0; i < 4; i++ ) {
@@ -664,6 +678,11 @@
 					}
 
 					currentBlock = getNewBlock();
+
+					if ( blockOverlapsGameMatrix( currentBlock, gameMatrix ) ) {
+						triggerGameOver();
+						currentBlock = null;
+					}
 				}
 
 				renderCurrentState();
@@ -682,6 +701,18 @@
 					pauseGame();
 					console.log( exception, exception.message );
 				}
+			},
+
+			/**
+			 * This is called when the game is lost - at the moment, it just
+			 * stops the game from updating on each tick, but it will be updated
+			 * later, along with the interface, to display a game over message
+			 * to the user.
+			 *
+			 * @return {void}
+			 */
+			triggerGameOver = function() {
+				stopTickTimer();
 			},
 
 			/**
