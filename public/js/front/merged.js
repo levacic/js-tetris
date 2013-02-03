@@ -1,7 +1,9 @@
 /**
- * A jQuery Tetris experiment
+ * A JavaScript Tetris experiment
  *
  * Coded from scratch just for fun
+ *
+ * Available at https://github.com/levacic/js-tetris
  *
  * @author Miloš Levačić
  */
@@ -618,6 +620,13 @@
 				renderCurrentBlock();
 			},
 
+			/**
+			 * Updates the gameMatrix by copying the current block into the
+			 * matrix itself - also copies the block type, so we would have the
+			 * correct colors in the built matrix.
+			 *
+			 * @return {void}
+			 */
 			updateGameMatrix = function() {
 				var i, j, currentRow, currentColumn;
 
