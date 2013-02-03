@@ -662,6 +662,37 @@
 			},
 
 			/**
+			 * Displays the overlay HTML element.
+			 *
+			 * @return {void}
+			 */
+			showOverlay = function() {
+				$( "#tetris-overlay" ).show();
+			},
+
+			/**
+			 * Hides the overlay HTML element.
+			 *
+			 * @return {void}
+			 */
+			hideOverlay = function() {
+				$( "#tetris-overlay" ).hide();
+			},
+
+			/**
+			 * Sets a custom message to the relevant HTML element, and shows the
+			 * overlay HTML element (thus, display the message contained within
+			 * it as well).
+			 *
+			 * @param  {String} message
+			 * @return {void}
+			 */
+			showMessage = function( message ) {
+				$( "#tetris-message" ).text( message );
+				showOverlay();
+			},
+
+			/**
 			 * Performs all the work for each "tick" of the game - calculates
 			 * collisions, moves pieces, checks for completed lines, etc.
 			 *
@@ -713,6 +744,7 @@
 			 */
 			triggerGameOver = function() {
 				stopTickTimer();
+				showMessage( "GAME OVER" );
 			},
 
 			/**
@@ -753,6 +785,7 @@
 			 */
 			pauseGame = function() {
 				stopTickTimer();
+				showMessage( "PAUSED" );
 			},
 
 			/**
@@ -763,6 +796,7 @@
 			 */
 			startGame = function() {
 				startTickTimer();
+				hideOverlay();
 			},
 
 			/**
