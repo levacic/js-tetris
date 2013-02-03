@@ -1024,7 +1024,7 @@
 			},
 
 			handleKeyboardMovement = function( keyCode ) {
-				if ( curentBlock === null ) {
+				if ( currentBlock === null ) {
 					return;
 				}
 
