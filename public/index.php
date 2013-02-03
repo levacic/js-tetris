@@ -42,6 +42,19 @@
 				<p id="tetris-message">PAUSED</p>
 			</div>
 			<aside id="tetris-sidebar">
+				<section id="tetris-sidebar-next-block">
+					<h1>NEXT BLOCK</h1>
+					<div id="tetris-next-block-container">
+						<?php for ( $i = 0; $i < 4; $i++ ) : ?>
+							<div class="tetris-row" data-row="<?php echo $i; ?>">
+								<?php for ( $j = 0; $j < 4; $j++ ) : ?>
+									<div class="tetris-cell" data-row="<?php echo $i; ?>" data-column="<?php echo $j; ?>">
+									</div>
+								<?php endfor; ?>
+							</div>
+						<?php endfor; ?>
+					</div>
+				</section>
 				<section id="tetris-sidebar-score">
 					<h1>SCORE</h1>
 					<p id="tetris-current-score">0000000000</p>

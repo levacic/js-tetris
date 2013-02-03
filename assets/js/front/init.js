@@ -283,6 +283,15 @@
 			currentBlock = null,
 
 			/**
+			 * The next game block. Used for displaying the next block in the
+			 * game sidebar; the current block will be taken from here when
+			 * needed.
+			 *
+			 * @type {Object}
+			 */
+			nextBlock = null,
+
+			/**
 			 * The current score.
 			 *
 			 * @type {Number}
@@ -568,14 +577,26 @@
 
 			/**
 			 * Returns a jQuery object containing the HTML element that
-			 * represents the desired row/cell.
+			 * represents the desired row/cell in the main tetris area.
 			 *
 			 * @param  {Number} row
 			 * @param  {Number} column
 			 * @return {Object}
 			 */
 			getHtmlCell = function( row, column ) {
-				return $( 'div.tetris-cell[data-row="' + row + '"][data-column="' + column + '"]' );
+				return $( 'div#tetris-container div.tetris-cell[data-row="' + row + '"][data-column="' + column + '"]' );
+			},
+
+			/**
+			 * Returns a jQuery object containing the HTML element that
+			 * represents the desired row/cell in the next block display area.
+			 *
+			 * @param  {Number} row
+			 * @param  {Number} column
+			 * @return {Object}
+			 */
+			getNextBlockHtmlCell = function( row, column ) {
+				return $( 'div#tetris-next-block-container div.tetris-cell[data-row="' + row + '"][data-column="' + column + '"]' );
 			},
 
 			/**
@@ -625,8 +646,6 @@
 					return;
 				}
 
-				currentHtmlCell = getHtmlCell( currentBlock.position.y, currentBlock.position.x );
-
 				for ( i = 0; i < 4; i++ ) {
 					for ( j = 0; j < 4; j++ ) {
 						currentX = currentBlock.position.x + j;
@@ -642,6 +661,33 @@
 			},
 
 			/**
+			 * Renders the next block in the designated area in the sidebar.
+			 *
+			 * @return {void}
+			 */
+			renderNextBlock = function() {
+				var i, j, currentHtmlCell;
+
+				if ( nextBlock === null ) {
+					return;
+				}
+
+				for ( i = 0; i < 4; i++ ) {
+					for ( j = 0; j < 4; j++ ) {
+						currentHtmlCell = getNextBlockHtmlCell( i, j );
+
+						if ( nextBlock.shape[i][j] ) {
+							currentHtmlCell.attr( "data-blocked", "true" );
+							currentHtmlCell.attr( "data-block-type", nextBlock.type );
+						} else {
+							currentHtmlCell.removeAttr( "data-blocked" );
+							currentHtmlCell.removeAttr( "data-block-type" );
+						}
+					}
+				}
+			},
+
+			/**
 			 * Renders the current game state depending on the `gameMatrix` and
 			 * the `currentBlock`.
 			 *
@@ -650,6 +696,7 @@
 			renderCurrentState = function() {
 				renderGameMatrix();
 				renderCurrentBlock();
+				renderNextBlock();
 			},
 
 			/**
@@ -769,7 +816,8 @@
 						gameMatrixCleanCompletedRows();
 					}
 
-					currentBlock = getNewBlock();
+					currentBlock = nextBlock;
+					nextBlock = getNewBlock();
 
 					if ( blockOverlapsGameMatrix( currentBlock, gameMatrix ) ) {
 						triggerGameOver();
@@ -902,6 +950,16 @@
 				currentBlock = getNewBlock();
 			},
 
+			/**
+			 * Initializes the next block - should be called at the start of the
+			 * game.
+			 *
+			 * @return {void}
+			 */
+			initializeNextBlock = function() {
+				nextBlock = getNewBlock();
+			},
+
 			handleKeyboardMovement = function( keyCode ) {
 				switch ( keyCode ) {
 					case KEYS.arrow.left:
@@ -968,6 +1026,7 @@
 			initializeGame = function() {
 				initializeGameMatrix();
 				initializeCurrentBlock();
+				initializeNextBlock();
 				initializeKeyboardControls();
 
 				console.log( "initialized" );
