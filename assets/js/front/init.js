@@ -377,7 +377,6 @@
 						if ( block.shape[i][j]
 							&& gameMatrix[currentRow][currentColumn].blocked
 						) {
-							//console.log( "overlap: ", i, j, currentRow, currentColumn );
 							return true;
 						}
 					}
@@ -408,7 +407,6 @@
 								|| (currentColumn < 0 )
 							)
 						) {
-							//console.log( "out of bounds: ", i, j, currentRow, currentColumn );
 							return false;
 						}
 					}
@@ -830,7 +828,12 @@
 					tick();
 				} catch( exception ) {
 					pauseGame();
-					console.log( exception, exception.message );
+
+					if ( typeof console !== "undefined" ) {
+						console.log( exception, exception.message );
+					} else {
+						alert( exception.message );
+					}
 				}
 			},
 
@@ -1019,8 +1022,6 @@
 				initializeCurrentBlock();
 				initializeNextBlock();
 				initializeKeyboardControls();
-
-				console.log( "initialized" );
 			};
 
 		return {
