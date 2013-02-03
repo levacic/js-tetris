@@ -18,5 +18,18 @@ haven't put much though into it beforehand.
 The CSS is generated from an SCSS file where it's easy to control settings like
 the game size, the colors, etc.
 
+Due to known non-optimized code, it currently only works smoothly under Chrome,
+but this will be fixed in the future.
+
 Released under no license for now - just do what you want with it. Eventually,
 I'll get around to reading about that stuff and put some *free*ish license.
+
+
+To-Do
+-----
+
+* Cache all the HTML elements in use, since they are currently a bottleneck in
+  some browsers - each time anything is updated, it does a *huge* number of DOM
+  lookups is performed.
+* Standardize the block starting positions
+* Do some sane refactoring
