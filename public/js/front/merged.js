@@ -24,11 +24,11 @@
 		var tickTimer = null,
 
 			/**
-			 * Configurable game speed settings
+			 * Minimum and maximum game levels
 			 */
 
-			MIN_GAME_SPEED = 1,
-			MAX_GAME_SPEED = 10,
+			MIN_GAME_LEVEL = 1,
+			MAX_GAME_LEVEL = 10,
 
 			/**
 			 * The string length of the score to be displayed (the score will
@@ -66,18 +66,32 @@
 			},
 
 			/**
-			 * The current game speed.
+			 * The current game level.
 			 *
 			 * @type {Number}
 			 */
-			currentSpeed = 1,
+			currentLevel = 1,
 
 			/**
 			 * The current interval between consecutive `tick()` functions.
 			 *
 			 * @type {Number}
 			 */
-			currentInterval = 200,
+			currentInterval = 500,
+
+			/**
+			 * The current score.
+			 *
+			 * @type {Number}
+			 */
+			currentScore = 0,
+
+			/**
+			 * The current number of completed lines.
+			 *
+			 * @type {Number}
+			 */
+			currentLines = 0,
 
 			/**
 			 * Dimensions for our game matrix
@@ -281,13 +295,6 @@
 			 * @type {Object}
 			 */
 			nextBlock = null,
-
-			/**
-			 * The current score.
-			 *
-			 * @type {Number}
-			 */
-			currentScore = 0,
 
 			/**
 			 * Returns a random block from the `gameBlocks` definitions.
@@ -535,31 +542,35 @@
 
 			/**
 			 * Calculates the current interval between calling the `tick()`
-			 * functions.
+			 * functions. Based on the algorithm in the pre-commercial MS-DOS
+			 * version of Tetris.
 			 *
-			 * @param  {Number} speed
+			 * @see http://www.colinfahey.com/tetris/tetris.html (5.10)
+			 *
+			 * @param  {Number} level
 			 * @return {Number}
 			 */
-			calculateInterval = function( speed ) {
-				return 1000 / speed;
+			calculateInterval = function( level ) {
+				return (11 - level) * 50;
 			},
 
 			/**
-			 * Sets the current game speed to the passed speed.
+			 * Sets the current game level and speed according to the passed
+			 * level [1-10].
 			 *
-			 * @param {Number} speed
+			 * @param {Number} level
 			 */
-			setSpeed = function( speed ) {
-				if ( typeof speed !== "number" ) {
-					throw new TypeError( "setSpeed expects a Number argument!" );
+			setLevel = function( level ) {
+				if ( typeof level !== "number" ) {
+					throw new TypeError( "setLevel expects a Number argument!" );
 				}
 
-				if ( speed < MIN_GAME_SPEED || speed > MAX_GAME_SPEED ) {
-					throw new RangeError( "setSpeed only accepts speeds [1-10]!" );
+				if ( level < MIN_GAME_LEVEL || level > MAX_GAME_LEVEL ) {
+					throw new RangeError( "setLevel only accepts levels [1-10]!" );
 				}
 
-				currentSpeed = speed;
-				currentInterval = calculateInterval( speed );
+				currentLevel = level;
+				currentInterval = calculateInterval( level );
 
 				restartTickTimer();
 			},
@@ -717,18 +728,57 @@
 
 			/**
 			 * Updates the current score and displays it, based on the number of
-			 * rows cleaned.
-			 *
-			 * At the moment the score is updated by adding *row thousand*
-			 * points to it, but it will be updated in the future to add more
-			 * points for more rows cleaned at once.
+			 * rows cleaned. Also updates the total lines completed, as well as
+			 * the current level (speed) of the game.
 			 *
 			 * @param  {Number} rows
 			 * @return {void}
 			 */
 			updateScore = function( rows ) {
-				currentScore += rows * 1000;
-				showScore();
+				currentLines += rows;
+
+				/**
+				 * Update the current level according to the forumla used in the
+				 * pre-commercial MS-DOS version of Tetris.
+				 *
+				 * @see http://www.colinfahey.com/tetris/tetris.html (5.9)
+				 */
+				if ( currentLines <= 0 ) {
+					setLevel( 1 );
+				} else if ( (currentLines >= 1) && (currentLines <= 90) ) {
+					setLevel( Math.floor( 1 + ((currentLines - 1) / 10) ) );
+				} else {
+					setLevel( 10 );
+				}
+
+				/**
+				 * Update the score according to the formula used in the
+				 * original Nintendo scoring system. Our levels start at 1, so
+				 * we don't need to multiply by `currentLevel + 1`.
+				 *
+				 * @see http://tetris.wikia.com/wiki/Scoring
+				 */
+				switch ( rows ) {
+					case 1:
+						currentScore += 40 * currentLevel;
+						break;
+
+					case 2:
+						currentScore += 100 * currentLevel;
+						break;
+
+					case 3:
+						currentScore += 300 * currentLevel;
+						break;
+
+					case 4:
+						currentScore += 1200 * currentLevel;
+						break;
+				}
+
+				showCurrentScore();
+				showCurrentLevel();
+				showCurrentLines();
 			},
 
 			/**
@@ -785,8 +835,27 @@
 			 *
 			 * @return {void}
 			 */
-			showScore = function() {
+			showCurrentScore = function() {
 				$( "#tetris-current-score" ).text( formatScore( currentScore ) );
+			},
+
+			/**
+			 * Shows the current level in the HTML element designated for that.
+			 *
+			 * @return {void}
+			 */
+			showCurrentLevel = function() {
+				$( "#tetris-current-level" ).text( currentLevel );
+			},
+
+			/**
+			 * Shows the current completed lines in the HTML element designated
+			 * for that.
+			 *
+			 * @return {void}
+			 */
+			showCurrentLines = function() {
+				$( "#tetris-current-lines" ).text( currentLines );
 			},
 
 			/**
@@ -955,6 +1024,10 @@
 			},
 
 			handleKeyboardMovement = function( keyCode ) {
+				if ( curentBlock === null ) {
+					return;
+				}
+
 				switch ( keyCode ) {
 					case KEYS.arrow.left:
 						if ( blockCanMove( DIRECTION.left, currentBlock, gameMatrix ) ) {
