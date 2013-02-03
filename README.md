@@ -24,6 +24,8 @@ but this will be fixed in the future.
 Released under no license for now - just do what you want with it. Eventually,
 I'll get around to reading about that stuff and put some *free*ish license.
 
+A playable version is available online at http://js-tetris.levacic.net
+
 
 To-Do
 -----
