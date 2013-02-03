@@ -25,12 +25,17 @@ $COLOR_BLOCK_S: #0f0;
 $COLOR_BLOCK_Z: #f00;
 $COLOR_BLOCK_O: #ff0;
 
+$SIDEBAR_WIDTH: 6 * $CELL_WIDTH;
+$SIDEBAR_HEIGHT: $GAME_ROWS * $CELL_HEIGHT;
+
 body {
 	margin:					0;
 
 	background:				#303030;
 
 	color:					#cbb;
+
+	font-family:			Arial, sans-serif;
 }
 
 div#main-container {
@@ -161,6 +166,30 @@ p#tetris-message {
 	text-align:				center;
 
 	font-size:				20px;
-	font-family:			Arial, sans-serif;
 	font-weight:			bold;
+}
+
+aside#tetris-sidebar {
+	position:				absolute;
+
+	top:					0;
+	left:					$GAME_COLS * $CELL_WIDTH;
+
+	padding:				10px;
+
+	width:					$SIDEBAR_WIDTH - 20px;
+	height:					$SIDEBAR_HEIGHT - 20px;
+
+	background:				#444;
+
+	font-family:			Consolas, Courier New, monospace;
+}
+
+section#tetris-sidebar-score {
+	h1, p {
+		margin:					0;
+		padding:				0;
+
+		font-size:				16px;
+	}
 }

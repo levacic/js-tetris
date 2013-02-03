@@ -41,6 +41,12 @@
 			<div id="tetris-overlay">
 				<p id="tetris-message">PAUSED</p>
 			</div>
+			<aside id="tetris-sidebar">
+				<section id="tetris-sidebar-score">
+					<h1>SCORE</h1>
+					<p>0000000000</p>
+				</section>
+			</aside>
 		</div>
 	</div>
 </body>
