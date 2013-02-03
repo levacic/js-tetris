@@ -536,7 +536,7 @@
 				var i, j;
 
 				for ( i = row; i > 0; i-- ) {
-					gameMatrix[i] = gameMatrix[i-1];
+					gameMatrix[i] = $.extend( true, [], gameMatrix[i-1] );
 				}
 
 				for ( j = 0; j < GAME_COLUMNS; j++ ) {
