@@ -11,7 +11,8 @@ $GAME_COLS: 10;
 $CELL_HEIGHT: 20px;
 $CELL_WIDTH: 20px;
 
-$BORDER_COLOR: #fff;
+$BORDER_COLOR: rgba( #fff, 0.8 );
+$BORDER_STYLE: ridge;
 $BORDER_WIDTH: 2px;
 
 $COLOR_BLOCKED: #f00;
@@ -84,7 +85,7 @@ div.tetris-cell {
 	}
 
 	&[data-blocked] {
-		border:					$BORDER_WIDTH solid $BORDER_COLOR;
+		border:					$BORDER_WIDTH $BORDER_STYLE $BORDER_COLOR;
 
 		$double_width: $BORDER_WIDTH * 2;
 
