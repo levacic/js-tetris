@@ -27,15 +27,20 @@
 		<button id="tetris-pause">Pause</button>
 		<button id="tetris-continue">Continue</button>
 
-		<div id="tetris-container">
-			<?php for ( $i = 0; $i < 20; $i++ ) : ?>
-				<div class="tetris-row" data-row="<?php echo $i; ?>">
-					<?php for ( $j = 0; $j < 10; $j++ ) : ?>
-						<div class="tetris-cell" data-row="<?php echo $i; ?>" data-column="<?php echo $j; ?>">
-						</div>
-					<?php endfor; ?>
-				</div>
-			<?php endfor; ?>
+		<div id="tetris-main-container">
+			<div id="tetris-container">
+				<?php for ( $i = 0; $i < 20; $i++ ) : ?>
+					<div class="tetris-row" data-row="<?php echo $i; ?>">
+						<?php for ( $j = 0; $j < 10; $j++ ) : ?>
+							<div class="tetris-cell" data-row="<?php echo $i; ?>" data-column="<?php echo $j; ?>">
+							</div>
+						<?php endfor; ?>
+					</div>
+				<?php endfor; ?>
+			</div>
+			<div id="tetris-overlay">
+				<p id="tetris-message">PAUSED</p>
+			</div>
 		</div>
 	</div>
 </body>
