@@ -44,7 +44,7 @@
 			<aside id="tetris-sidebar">
 				<section id="tetris-sidebar-score">
 					<h1>SCORE</h1>
-					<p>0000000000</p>
+					<p id="tetris-current-score">0000000000</p>
 				</section>
 			</aside>
 		</div>

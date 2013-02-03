@@ -31,6 +31,14 @@
 			MAX_GAME_SPEED = 10,
 
 			/**
+			 * The string length of the score to be displayed (the score will
+			 * always be left-padded with 0s to this length).
+			 *
+			 * @type {Number}
+			 */
+			SCORE_LENGTH = 10,
+
+			/**
 			 * Some predefined types for type comparison. Useful if a JS
 			 * implementation uses, e.g. "Number" instead of "number", and
 			 * easier and more readable than manipulating case in comparisons.
@@ -275,6 +283,13 @@
 			currentBlock = null,
 
 			/**
+			 * The current score.
+			 *
+			 * @type {Number}
+			 */
+			currentScore = 0,
+
+			/**
 			 * Returns a random block from the `gameBlocks` definitions.
 			 *
 			 * @return {Object}
@@ -477,7 +492,7 @@
 			 */
 			gameMatrixCleanCompletedRows = function() {
 				var i, j, rowCompleted,
-					completedRows = [];
+					completedRows = 0;
 
 				i = GAME_ROWS - 1;
 
@@ -492,10 +507,13 @@
 
 					if ( rowCompleted ) {
 						gameMatrixCleanRow( i );
+						++completedRows;
 					} else {
 						--i;
 					}
 				}
+
+				updateScore( completedRows );
 			},
 
 			/**
@@ -662,6 +680,22 @@
 			},
 
 			/**
+			 * Updates the current score and displays it, based on the number of
+			 * rows cleaned.
+			 *
+			 * At the moment the score is updated by adding *row thousand*
+			 * points to it, but it will be updated in the future to add more
+			 * points for more rows cleaned at once.
+			 *
+			 * @param  {Number} rows
+			 * @return {void}
+			 */
+			updateScore = function( rows ) {
+				currentScore += rows * 1000;
+				showScore();
+			},
+
+			/**
 			 * Displays the overlay HTML element.
 			 *
 			 * @return {void}
@@ -690,6 +724,33 @@
 			showMessage = function( message ) {
 				$( "#tetris-message" ).text( message );
 				showOverlay();
+			},
+
+			/**
+			 * Formats a score by left-padding it with 0s to the desired length,
+			 * configurable by `SCORE_LENGTH`.
+			 *
+			 * @param  {Number} score
+			 * @return {String}
+			 */
+			formatScore = function( score ) {
+				var scoreString = score.toString();
+
+				while ( scoreString.length < SCORE_LENGTH ) {
+					scoreString = "0" + scoreString;
+				}
+
+				return scoreString;
+			},
+
+			/**
+			 * Shows the formatted current score in the HTML element designated
+			 * for that.
+			 *
+			 * @return {void}
+			 */
+			showScore = function() {
+				$( "#tetris-current-score" ).text( formatScore( currentScore ) );
 			},
 
 			/**
