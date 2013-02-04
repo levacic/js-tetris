@@ -30,8 +30,8 @@ A playable version is available online at http://js-tetris.levacic.net
 To-Do
 -----
 
-* Cache all the HTML elements in use, since they are currently a bottleneck in
-  some browsers - each time anything is updated, a *huge* number of DOM lookups
-  is performed
 * Standardize the block starting positions
 * Do some sane refactoring
+* Use native attribute manipulation instead of jQuery substitutes
+  (`setAttribute()` instead of `attr()`, `removeAttribute()` instead of
+  `removeAttr()`)
