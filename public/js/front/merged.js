@@ -297,6 +297,19 @@
 			nextBlock = null,
 
 			/**
+			 * This is used by the `getHtmlCell()` and `getNextBlockHtmlCell()`
+			 * methods to cache the jQuery objects containing the relevant HTML
+			 * elements, so we wouldn't do a DOM lookup hundreds of times on
+			 * each tick.
+			 *
+			 * @type {Object}
+			 */
+			cachedHtmlCells = {
+				mainGameArea: [],
+				nextBlockArea: []
+			},
+
+			/**
 			 * Returns a random block from the `gameBlocks` definitions.
 			 *
 			 * @return {Object}
@@ -584,7 +597,17 @@
 			 * @return {Object}
 			 */
 			getHtmlCell = function( row, column ) {
-				return $( 'div#tetris-container div.tetris-cell[data-row="' + row + '"][data-column="' + column + '"]' );
+				if ( typeof cachedHtmlCells.mainGameArea[row] === "undefined" ) {
+					cachedHtmlCells.mainGameArea[row] = [];
+				}
+
+				if ( typeof cachedHtmlCells.mainGameArea[row][column] === "undefined" ) {
+					cachedHtmlCells.mainGameArea[row][column] =
+						$( 'div#tetris-container div.tetris-cell[data-row="' + row + '"][data-column="' + column + '"]' );
+
+				}
+
+				return cachedHtmlCells.mainGameArea[row][column];
 			},
 
 			/**
@@ -596,7 +619,16 @@
 			 * @return {Object}
 			 */
 			getNextBlockHtmlCell = function( row, column ) {
-				return $( 'div#tetris-next-block-container div.tetris-cell[data-row="' + row + '"][data-column="' + column + '"]' );
+				if ( typeof cachedHtmlCells.nextBlockArea[row] === "undefined" ) {
+					cachedHtmlCells.nextBlockArea[row] = [];
+				}
+
+				if ( typeof cachedHtmlCells.nextBlockArea[row][column] === "undefined" ) {
+					cachedHtmlCells.nextBlockArea[row][column] =
+						$( 'div#tetris-next-block-container div.tetris-cell[data-row="' + row + '"][data-column="' + column + '"]' );
+				}
+
+				return cachedHtmlCells.nextBlockArea[row][column];
 			},
 
 			/**
