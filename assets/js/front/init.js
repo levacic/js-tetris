@@ -603,8 +603,7 @@
 
 				if ( typeof cachedHtmlCells.mainGameArea[row][column] === "undefined" ) {
 					cachedHtmlCells.mainGameArea[row][column] =
-						$( 'div#tetris-container div.tetris-cell[data-row="' + row + '"][data-column="' + column + '"]' );
-
+						document.getElementById( "tetris-cell-" + row + "-" + column );
 				}
 
 				return cachedHtmlCells.mainGameArea[row][column];
@@ -625,7 +624,7 @@
 
 				if ( typeof cachedHtmlCells.nextBlockArea[row][column] === "undefined" ) {
 					cachedHtmlCells.nextBlockArea[row][column] =
-						$( 'div#tetris-next-block-container div.tetris-cell[data-row="' + row + '"][data-column="' + column + '"]' );
+						document.getElementById( "next-block-cell-" + row + "-" + column );
 				}
 
 				return cachedHtmlCells.nextBlockArea[row][column];
@@ -646,11 +645,11 @@
 						currentHtmlCell = getHtmlCell( i, j );
 
 						if ( currentCell.blocked ) {
-							currentHtmlCell.attr( "data-blocked", "true" );
-							currentHtmlCell.attr( "data-block-type", currentCell.type );
+							currentHtmlCell.setAttribute( "data-blocked", "true" );
+							currentHtmlCell.setAttribute( "data-block-type", currentCell.type );
 						} else {
-							currentHtmlCell.removeAttr( "data-blocked" );
-							currentHtmlCell.removeAttr( "data-block-type" );
+							currentHtmlCell.removeAttribute( "data-blocked" );
+							currentHtmlCell.removeAttribute( "data-block-type" );
 						}
 					}
 				}
@@ -685,8 +684,8 @@
 						currentHtmlCell = getHtmlCell( currentY, currentX );
 
 						if ( currentBlock.shape[i][j] ) {
-							currentHtmlCell.attr( "data-blocked", "true" );
-							currentHtmlCell.attr( "data-block-type", currentBlock.type );
+							currentHtmlCell.setAttribute( "data-blocked", "true" );
+							currentHtmlCell.setAttribute( "data-block-type", currentBlock.type );
 						}
 					}
 				}
@@ -709,11 +708,11 @@
 						currentHtmlCell = getNextBlockHtmlCell( i, j );
 
 						if ( nextBlock.shape[i][j] ) {
-							currentHtmlCell.attr( "data-blocked", "true" );
-							currentHtmlCell.attr( "data-block-type", nextBlock.type );
+							currentHtmlCell.setAttribute( "data-blocked", "true" );
+							currentHtmlCell.setAttribute( "data-block-type", nextBlock.type );
 						} else {
-							currentHtmlCell.removeAttr( "data-blocked" );
-							currentHtmlCell.removeAttr( "data-block-type" );
+							currentHtmlCell.removeAttribute( "data-blocked" );
+							currentHtmlCell.removeAttribute( "data-block-type" );
 						}
 					}
 				}

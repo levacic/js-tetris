@@ -32,8 +32,7 @@
 				<?php for ( $i = 0; $i < 20; $i++ ) : ?>
 					<div class="tetris-row" data-row="<?php echo $i; ?>">
 						<?php for ( $j = 0; $j < 10; $j++ ) : ?>
-							<div class="tetris-cell" data-row="<?php echo $i; ?>" data-column="<?php echo $j; ?>">
-							</div>
+							<div id="<?php echo "tetris-cell-{$i}-{$j}"; ?>" class="tetris-cell" data-row="<?php echo $i; ?>" data-column="<?php echo $j; ?>"></div>
 						<?php endfor; ?>
 					</div>
 				<?php endfor; ?>
@@ -48,7 +47,7 @@
 						<?php for ( $i = 0; $i < 4; $i++ ) : ?>
 							<div class="tetris-row" data-row="<?php echo $i; ?>">
 								<?php for ( $j = 0; $j < 4; $j++ ) : ?>
-									<div class="tetris-cell" data-row="<?php echo $i; ?>" data-column="<?php echo $j; ?>">
+									<div id="<?php echo "next-block-cell-{$i}-{$j}"; ?>" class="tetris-cell" data-row="<?php echo $i; ?>" data-column="<?php echo $j; ?>">
 									</div>
 								<?php endfor; ?>
 							</div>

@@ -32,6 +32,3 @@ To-Do
 
 * Standardize the block starting positions
 * Do some sane refactoring
-* Use native attribute manipulation instead of jQuery substitutes
-  (`setAttribute()` instead of `attr()`, `removeAttribute()` instead of
-  `removeAttr()`)
